@@ -1,0 +1,216 @@
+---
+title: "True Number"
+author: "Runci Hu, Tong Sun, Tianjian Xie"
+date: "2022-11-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(magrittr)
+library(tnum)
+tnum.loadLibs()
+tnum.authorize(ip = "mssp.truenum.com:8080", creds = "runcihu@bu.edu:leopard")
+library(tibble)
+d1 <- tnum.getAllProperties()
+d2 <- tnum.getAllSubjects()
+d3 <- tnum.getAllTags()
+```
+
+## Assignment Part 1: Text Analysis with Truenumbers
+```{r echo=FALSE}
+weena <- data.frame(tnum.query("stringval:Weena"))
+tnum.graphPathList(weena$subject)
+```
+# Graph of "Weena"'s path list - Summary of Weena's story
+Weena is an Eloi(One of the two made up races in the book) girl, who is an important character in the Time Machine. From the Path list graph we can see in this book, "Weena" appears most in Chapter 10 and 12. Her name was mentioned in Chapter 8, sentence 56, "Then I tried talk, and found that her name was Weena, which, though I don't know what it meant, somehow seemed appropriate enough." for the first time. At Chapter 16, sentence 32, "He spoke like one who was trying to keep hold of an idea that eluded him. 'They were put into my pocket by Weena, when I travelled into Time.'", her name was mentioned for the last time. In this book, Weena once nearly drown in the river, the time traveller saved her, when another Eloi just stand by. Weena made a garland of flower for the time traveller as gift, and joined his expedition to take back his time machine. Before the time traveller seize his time machine back, they were surrounded by the Morlocks, during the fighting, Weena was sperated with the time traveller, and lost in the forest fire set by the time traveller. In Chapter 16, sentence 32, which is the last sentence Weena's name appeared in the book, the time traveller found the flowers in his pocket, which were put by Weena. This is the main experience and story of Weena in the Time Machine.
+
+```{r echo=FALSE}
+traveller <- data.frame(tnum.query("stringval:time traveller"))
+tnum.graphPathList(traveller$subject)
+```
+# Graph of "time traveller"'s path list - Summary of time traveller's story
+The time traveller is introducing to other people in his house at the beginning of the story, he talked about that he believes time exists in the fourth dimension. During the conversation, he took out a tiny clock size machine and shown its function to the other people, it's a time machine. After impressed his guest, he introduce them the larger version of the time machine. 
+
+When his guest return to his home a week later, they found the time traveller was dusty and in a disheveled situation, he told them the story about his time travelling expereince. 
+
+After he turned on his time machine, he found that he was bring to the future, and landed in the year 802701 A.D. He noticed he was surrounded by figures speaking in a language he does not understand but finds pleasant nonetheless. Those figures have curly hair and large eyes, looks thin and beautiful. Those are the Elois. 
+
+When the time traveller return to the place where is his time machine after the night falls, he found that the machine is disappeared. When he is finding his machine in Elois' society, he noticed they are decadent and offish. When he discovered and rescue an Eloi woman called Weena in a river, all the other Elois just stand by. 
+
+In the following days, he found that the speices that took away his machine is called Morlocks, they were look like apes, and scary the Elois a lot. They live underground and only appear in surface ground after the nights fall. To take his time machine back, the time traveller decides go to the underground world. 
+
+With Weena's accompany, the time traveller reach the palace of green porcelain, and break a lever off a machine to operate his time machine. 
+
+When the night comes again, the time traveller and Weena are attempting to accross the forest. He start a fire in the forest to stop the Morlocks, but they found they were surrounded by the Morlocks. During fight, Weena was sperated with the time traveller, and lost in the forest fire. Under Morlocks' attack, the time traveller finally enter his time machine and go back to his time. When he get out of the machine, he found that his guests are waiting for him.
+
+At the end of the time, the narrator told the readers the story was happened three years ago, after that, no one seen the time traveller anymore. Theyonly has two, dried out flowers that Weena gave to the time traveller in the future to prove this incredible story.
+
+```{r echo=FALSE}
+morlock <- data.frame(tnum.query("stringval:Morlock"))
+tnum.graphPathList(morlock$subject)
+eloi <- data.frame(tnum.query("stringval:Eloi"))
+tnum.graphPathList(eloi$subject)
+```
+# Graph of "Morlock"'s and "Eloi"'s path list - Summary of the two species
+Morlocks is one of the two made up species in the Time Machine, the looks like apes, and lives in their underground homes. When the night falls, they will appear on the surface world and kill the Elois, the time traveller thinks they eat the Elois. They have more drama in the whole books since they are the enemies of the time traveller during his journey to take his time machine back.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Assignment part 2: Analysis of Numeric Data with Truenumbers
+Choose 10 truenumber
+```{r}
+x1 <- tnum.query("subj:Connecticut* and prop:population:bachelors and numval: >1000")
+x1_tag <- mapply(FUN = tnum.addTag, guid = x1$id, 
+                 tag = "pop bachelors:large", 
+                 text = "the population of bachelors in Connecticut")
+tnum.getTagsOfTn(x1[1,]$id)
+kable(x1)
+```
+
+```{r}
+x2 <- tnum.query("subj:Maine* and prop:population:bachelors and numval: >1000")
+x2_tag <- mapply(FUN = tnum.addTag, guid = x2$id, 
+                 tag = "pop bachelors:large", 
+                 text = "the population of bachelors in Maine")
+tnum.getTagsOfTn(x2[1,]$id)
+kable(x2)
+```
+
+```{r}
+x3 <- tnum.query("subj:Massachusetts* and prop:population:bachelors and numval: >1000")
+x3_tag <- mapply(FUN = tnum.addTag, guid = x3$id, 
+                 tag = "pop bachelors:large", 
+                 text = "the population of bachelors in Massachusetts")
+tnum.getTagsOfTn(x1[3,]$id)
+kable(x3)
+```
+
+```{r}
+x4 <- tnum.query("subj:New_Hampshire* and prop:population:bachelors and numval: >1000")
+x4_tag <- mapply(FUN = tnum.addTag, guid = x4$id, 
+                 tag = "pop bachelors:large", 
+                 text = "the population of bachelors in New Hampshire")
+tnum.getTagsOfTn(x4[1,]$id)
+kable(x4)
+```
+
+```{r}
+x5 <- tnum.query("subj:Rhode_Island* and prop:population:bachelors and numval: >1000")
+x5_tag <- mapply(FUN = tnum.addTag, guid = x5$id, 
+                 tag = "pop bachelors:large", 
+                 text = "the population of bachelors in Rhode Island")
+tnum.getTagsOfTn(x5[1,]$id)
+kable(x5)
+```
+
+```{r}
+x6 <- tnum.query("subj:Connecticut* and prop:households and numval: >1000")
+x6_tag <- mapply(FUN = tnum.addTag, guid = x6$id, 
+                 tag = "households:large", 
+                 text = "the households in Connecticut")
+tnum.getTagsOfTn(x6[1,]$id)
+kable(x6)
+```
+
+```{r}
+x7 <- tnum.query("subj:Maine* and prop:households and numval: >1000")
+x7_tag <- mapply(FUN = tnum.addTag, guid = x7$id, 
+                 tag = "households:large", 
+                 text = "the households in Maine")
+tnum.getTagsOfTn(x7[1,]$id)
+kable(x7)
+```
+
+```{r}
+x8 <- tnum.query("subj:Massachusetts* and prop:households and numval: >1000")
+x8_tag <- mapply(FUN = tnum.addTag, guid = x8$id, 
+                 tag = "households:large", 
+                 text = "the households in Massachusetts")
+tnum.getTagsOfTn(x8[1,]$id)
+kable(x8)
+```
+
+```{r}
+x9 <- tnum.query("subj:New_Hampshire* and prop:households and numval: >1000")
+x9_tag <- mapply(FUN = tnum.addTag, guid = x9$id, 
+                 tag = "households:large", 
+                 text = "the households in New Hampshire")
+tnum.getTagsOfTn(x9[1,]$id)
+kable(x9)
+```
+
+```{r}
+x10 <- tnum.query("subj:Rhode_Island* and prop:households and numval: >1000")
+x10_tag <- mapply(FUN = tnum.addTag, guid = x10$id, 
+                 tag = "households:large", 
+                 text = "the households in Rhode Island")
+tnum.getTagsOfTn(x10[1,]$id)
+kable(x10)
+```
+
+Post statement
+```{r}
+state1 <- tnum.postStatement( 
+  stmt = "the largest population of bachelors of Connecticut at New London County is 34499", 
+  notes = "Our first truenumber")
+
+state2 <- tnum.postStatement(
+  stmt = "the largest population of bachelors of Maine at Cumberland County is 61773", 
+  notes = "Our fourth truenumber")
+
+state3 <- tnum.postStatement(
+  stmt = "the largest population of bachelors of Massachusetts at Worcester County is 124955", 
+  notes = "Our third truenumber")
+
+state4 <- tnum.postStatement(
+  stmt = "the largest population of bachelors of New Hampshire at Hillsboroug County is 70773", 
+  notes = "Our fifth truenumber")
+
+state5 <- tnum.postStatement(
+  stmt = "the largest population of bachelors of Rhode Island at Providence County is 76172", 
+  notes = "Our second truenumber")
+
+state6 <- tnum.postStatement(
+  stmt = "the highest households of Connecticut at Hartford County is 350408", 
+  notes = "Our sixth truenumber")
+
+state7 <- tnum.postStatement(
+  stmt = "the highest households of Maine at Cumberland County is 120644", 
+  notes = "Our seventh truenumber")
+
+state8 <- tnum.postStatement(
+  stmt = "the highest households of Massachusetts at Middlesex County is 604384", 
+  notes = "Our eighth truenumber")
+
+state9 <- tnum.postStatement(
+  stmt = "the highest households of New Hampshire at Hillsborough County is 161086", 
+  notes = "Our ninth truenumber")
+
+state10 <- tnum.postStatement(
+  stmt = "the highest households of Rhode Island at Providence County is 237971",
+  notes = "Our tenth truenumber")
+```
+
+```{r}
+df <- tnum.jsonArray(list(state1, state2, state3, state4, state5, state6, state7, state8, state9, state10))
+kable(df)
+```
+
+
+
+
