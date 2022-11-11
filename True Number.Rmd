@@ -56,18 +56,8 @@ tnum.graphPathList(eloi$subject)
 # Graph of "Morlock"'s and "Eloi"'s path list - Summary of the two species
 Morlocks is one of the two made up species in the Time Machine, the looks like apes, and lives in their underground homes. When the night falls, they will appear on the surface world and kill the Elois, the time traveller thinks they eat the Elois. They have more drama in the whole books since they are the enemies of the time traveller during his journey to take his time machine back.
 
-
-
-
-
-
-
-
-
-
-
-
-
+# Conclusion
+So from this project, we used the tnum package to help us take a quick look of the book instead of reading it. We use the main characters given, and search for the other main characters or groups in the book and use them as key words to search their relative sentences in the book to take a brief view about what they done and experienced in the book. During this process, we met some problems such as "the Narrator", which is one of the characters in this book, can't be found through tnum.query function. Also, it seems a hundred percent that in the book, the author used pronouns instead of the names of the characters, this will make us miss some sentences that the characters appeared. Although there are many problems, we still can use this package and dataset to build a basic understanding about the story of the Time Machine. 
 
 
 
